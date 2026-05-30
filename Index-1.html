@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Gladys 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #c9a96e;
+      --rose: #e8637a;
+      --deep: #0d0608;
+      --cream: #f5e6d3;
+      --wine: #6b1a2a;
+      --blush: #f0a0b0;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      width: 18px; height: 18px;
+      background: var(--rose);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.3s;
+      mix-blend-mode: screen;
+    }
+
+    /* ── FILM GRAIN ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.35;
+      animation: grain 0.5s steps(1) infinite;
+    }
+    @keyframes grain {
+      0%,100%{transform:translate(0,0)} 10%{transform:translate(-2%,-3%)} 20%{transform:translate(3%,2%)}
+      30%{transform:translate(-1%,3%)} 40%{transform:translate(2%,-1%)} 50%{transform:translate(-3%,1%)}
+      60%{transform:translate(1%,-2%)} 70%{transform:translate(-2%,2%)} 80%{transform:translate(3%,-3%)}
+      90%{transform:translate(-1%,1%)}
+    }
+
+    /* ── LOVE BUBBLES ── */
+    #bubbles { position:fixed; inset:0; pointer-events:none; z-index:10; overflow:hidden; }
+    .bubble { position:absolute; top:-60px; font-size:1.4rem; animation:fall linear infinite; opacity:0; user-select:none; }
+    @keyframes fall {
+      0%{opacity:0;transform:translateY(0) rotate(0deg) scale(0.6)}
+      10%{opacity:0.85} 90%{opacity:0.7}
+      100%{opacity:0;transform:translateY(110vh) rotate(360deg) scale(1.1)}
+    }
+
+    /* ── CINEMATIC INTRO ── */
+    #intro {
+      position:fixed; inset:0; z-index:5000; background:#000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      animation: introFadeOut 1s ease 7.5s forwards;
+    }
+    @keyframes introFadeOut { to{opacity:0;pointer-events:none} }
+    .intro-slide {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; opacity:0; text-align:center; padding:2rem;
+    }
+    .intro-slide:nth-child(1){animation:slideShow 2.5s ease 0s forwards}
+    .intro-slide:nth-child(2){animation:slideShow 2.5s ease 2.5s forwards}
+    .intro-slide:nth-child(3){animation:slideShow 2.5s ease 5s forwards}
+    @keyframes slideShow {
+      0%{opacity:0;transform:scale(1.06)} 15%{opacity:1;transform:scale(1)}
+      80%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(0.96)}
+    }
+    .intro-tag{font-family:'Cinzel',serif;font-size:clamp(0.55rem,1.2vw,0.8rem);letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;opacity:0.75}
+    .intro-title{font-family:'Great Vibes',cursive;font-size:clamp(3rem,9vw,7rem);color:var(--cream);line-height:1.1;text-shadow:0 0 60px rgba(201,169,110,0.4)}
+    .intro-line{width:80px;height:1px;background:var(--gold);margin:1.2rem auto;opacity:0.6}
+    .intro-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--blush);letter-spacing:0.08em}
+
+    /* ── MAIN ── */
+    #main { opacity:0; animation:mainReveal 1.5s ease 8.2s forwards; }
+    @keyframes mainReveal { to{opacity:1} }
+
+    /* ── HERO ── */
+    #hero {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; text-align:center; position:relative; padding:4rem 2rem; overflow:hidden;
+    }
+    #hero::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%,rgba(107,26,42,0.35) 0%,transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 80%,rgba(201,169,110,0.1) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 20%,rgba(232,99,122,0.12) 0%,transparent 60%);
+    }
+    .hero-eyebrow{font-family:'Cinzel',serif;font-size:clamp(0.6rem,1.4vw,0.85rem);letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease 9s forwards}
+    .hero-name{font-family:'Great Vibes',cursive;font-size:clamp(4rem,14vw,11rem);color:var(--cream);line-height:0.9;text-shadow:0 0 80px rgba(201,169,110,0.5),0 0 200px rgba(232,99,122,0.2);opacity:0;animation:fadeUp 1.2s ease 9.3s forwards;position:relative}
+    .hero-birthday{font-family:'Cinzel',serif;font-size:clamp(0.75rem,2vw,1.1rem);letter-spacing:0.6em;color:var(--gold);margin-top:1.5rem;opacity:0;animation:fadeUp 1s ease 9.7s forwards}
+    .hero-divider{display:flex;align-items:center;gap:1rem;margin:2.5rem auto;width:min(320px,80vw);opacity:0;animation:fadeUp 1s ease 10s forwards}
+    .hero-divider::before,.hero-divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+    .hero-divider-icon{color:var(--rose);font-size:1.2rem}
+    .hero-poem{font-size:clamp(1rem,2.5vw,1.35rem);font-style:italic;line-height:2;color:rgba(245,230,211,0.85);max-width:520px;opacity:0;animation:fadeUp 1s ease 10.3s forwards}
+    .scroll-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:fadeIn 1s ease 11s forwards;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase}
+    .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+    @keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.7)}}
+
+    /* ── SECTION SHARED ── */
+    .section-label{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;opacity:0.7}
+    .section-title{font-family:'Great Vibes',cursive;font-size:clamp(2.5rem,7vw,5rem);color:var(--cream);margin-bottom:4rem;text-shadow:0 0 40px rgba(201,169,110,0.3)}
+
+    /* ── REASONS ── */
+    #reasons { padding:8rem 2rem; max-width:900px; margin:0 auto; text-align:center; }
+    .reasons-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2.5rem; text-align:left; }
+    .reason-card {
+      background:linear-gradient(135deg,rgba(107,26,42,0.2),rgba(201,169,110,0.06));
+      border:1px solid rgba(201,169,110,0.18); border-radius:2px; padding:2.5rem 2rem;
+      position:relative; overflow:hidden; transition:transform 0.4s ease, border-color 0.4s ease;
+    }
+    .reason-card:hover{transform:translateY(-6px);border-color:rgba(201,169,110,0.5)}
+    .reason-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--rose),var(--gold))}
+    .reason-number{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.4em;color:var(--gold);opacity:0.6;margin-bottom:0.75rem}
+    .reason-text{font-size:1.1rem;font-style:italic;line-height:1.8;color:var(--cream);opacity:0.9}
+
+    /* ══════════════════════════════════
+       ── MUSIC PLAYER ──
+    ══════════════════════════════════ */
+    #music-section {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .music-player {
+      max-width: 520px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(107,26,42,0.35), rgba(13,6,8,0.8));
+      border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .music-player::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,99,122,0.12), transparent 70%);
+    }
+
+    .music-vinyl {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(#1a0810 0deg, #2d0e1a 60deg, #1a0810 120deg, #2d0e1a 180deg, #1a0810 240deg, #2d0e1a 300deg, #1a0810 360deg);
+      border: 3px solid rgba(201,169,110,0.4);
+      margin: 0 auto 2rem;
+      position: relative;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 30px rgba(232,99,122,0.2);
+    }
+
+    .music-vinyl.spinning {
+      animation: spin 4s linear infinite;
+    }
+
+    .music-vinyl::after {
+      content: '';
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--gold) 30%, #2d0e1a 31%);
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px rgba(201,169,110,0.5);
+    }
+
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    .music-song-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+      position: relative;
+    }
+
+    .music-artist {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .music-note {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(245,230,211,0.5);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    /* ── HOW TO USE: Replace "your-song.mp3" with your actual song filename ── */
+    /* ── Place your song file in the same folder as this HTML file ── */
+    .music-audio {
+      width: 100%;
+      position: relative;
+      margin-bottom: 1rem;
+      filter: sepia(30%) hue-rotate(310deg) saturate(1.5);
+      border-radius: 30px;
+      outline: none;
+    }
+
+    .music-upload-hint {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: rgba(201,169,110,0.45);
+      text-transform: uppercase;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    /* ══════════════════════════════════
+       ── PHOTO GALLERY ──
+    ══════════════════════════════════ */
+    #gallery-section {
+      padding: 7rem 2rem;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Filmstrip row above the gallery */
+    .filmstrip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 3rem;
+      opacity: 0.4;
+    }
+    .film-hole {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      border: 1px solid var(--gold);
+      margin: 0 6px;
+      flex-shrink: 0;
+    }
+    .film-bar {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 640px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .photo-frame {
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, rgba(107,26,42,0.3), rgba(201,169,110,0.08));
+      border: 1px solid rgba(201,169,110,0.2);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .photo-frame:hover {
+      transform: scale(1.03) rotate(-0.5deg);
+      border-color: rgba(201,169,110,0.55);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(232,99,122,0.15);
+      z-index: 2;
+    }
+
+    /* The actual <img> inside each frame */
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: sepia(15%) contrast(1.05) brightness(0.95);
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.06);
+      filter: sepia(5%) contrast(1.1) brightness(1.05);
+    }
+
+    /* Placeholder shown when no image is set */
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: rgba(201,169,110,0.35);
+      text-align: center;
+      padding: 1rem;
+      position: absolute;
+      inset: 0;
+    }
+
+    .photo-placeholder .ph-icon { font-size: 1.8rem; }
+    .photo-placeholder .ph-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+    .photo-placeholder .ph-hint {
+      font-size: 0.7rem;
+      font-style: italic;
+      opacity: 0.5;
+      max-width: 120px;
+    }
+
+    /* Cinematic overlay on photo */
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,6,8,0.5) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Caption inside each frame */
+    .photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem 0.8rem 0.8rem;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: rgba(245,230,211,0.8);
+      z-index: 2;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 8000;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,169,110,0.3);
+      box-shadow: 0 0 80px rgba(232,99,122,0.2);
+      animation: lbIn 0.35s ease;
+    }
+    @keyframes lbIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+    #lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.3em; color: var(--gold); cursor: pointer; text-transform: uppercase;
+      background: none; border: none;
+    }
+    #lightbox-close:hover { color: var(--rose); }
+
+    /* ══════════════════════════════════
+       ── VIDEO SECTION ──
+    ══════════════════════════════════ */
+    #video-section {
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .video-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Decorative film border */
+    .video-frame-border {
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(107,26,42,0.4), rgba(201,169,110,0.1));
+      border: 1px solid rgba(201,169,110,0.3);
+      position: relative;
+    }
+
+    .video-frame-border::before, .video-frame-border::after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold);
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+    .video-frame-border::before { top: 6px; left: 10px; }
+    .video-frame-border::after  { bottom: 6px; right: 10px; }
+
+    /* ── HOW TO USE: Replace "your-video.mp4" with your actual video filename ── */
+    /* ── Place your video file in the same folder as this HTML file ── */
+    .love-video {
+      width: 100%;
+      display: block;
+      background: #0d0608;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(107,26,42,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 2px dashed rgba(201,169,110,0.2);
+    }
+    .video-placeholder .vp-icon { font-size: 3rem; opacity: 0.4; }
+    .video-placeholder .vp-text {
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 0.4em; color: var(--gold); opacity: 0.5;
+      text-transform: uppercase;
+    }
+    .video-placeholder .vp-hint {
+      font-style: italic; font-size: 0.85rem;
+      color: rgba(245,230,211,0.35);
+    }
+
+    .video-caption {
+      margin-top: 1.5rem;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(245,230,211,0.6);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LETTER ── */
+    #letter {
+      padding:8rem 2rem;
+      background:linear-gradient(180deg,transparent,rgba(107,26,42,0.15) 30%,rgba(107,26,42,0.15) 70%,transparent);
+      text-align:center;
+    }
+    .letter-inner {
+      max-width:680px; margin:0 auto;
+      background:rgba(245,230,211,0.04);
+      border:1px solid rgba(201,169,110,0.15);
+      padding:clamp(2.5rem,6vw,5rem); position:relative;
+    }
+    .letter-inner::before,.letter-inner::after{content:'❧';position:absolute;font-size:1.5rem;color:var(--gold);opacity:0.4}
+    .letter-inner::before{top:1.2rem;left:1.5rem}
+    .letter-inner::after{bottom:1.2rem;right:1.5rem;transform:rotate(180deg)}
+    .letter-greeting{font-family:'Great Vibes',cursive;font-size:clamp(2rem,5vw,3.5rem);color:var(--rose);margin-bottom:2rem}
+    .letter-body{font-size:clamp(1rem,2vw,1.2rem);font-style:italic;line-height:2.2;color:rgba(245,230,211,0.88);text-align:left}
+    .letter-body p+p{margin-top:1.5rem}
+    .letter-sig{font-family:'Great Vibes',cursive;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--gold);margin-top:3rem;display:block;text-align:right}
+
+    /* ── FINALE ── */
+    #finale {
+      min-height:80vh; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; text-align:center; padding:4rem 2rem; position:relative; overflow:hidden;
+    }
+    #finale::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,26,42,0.5) 0%,transparent 75%)}
+    .finale-title{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,11vw,9rem);color:var(--cream);text-shadow:0 0 100px rgba(232,99,122,0.6),0 0 200px rgba(201,169,110,0.3);line-height:1;position:relative;z-index:1;animation:pulse-glow 3s ease-in-out infinite}
+    @keyframes pulse-glow{0%,100%{text-shadow:0 0 80px rgba(232,99,122,0.5),0 0 160px rgba(201,169,110,0.2)} 50%{text-shadow:0 0 120px rgba(232,99,122,0.9),0 0 240px rgba(201,169,110,0.5)}}
+    .finale-year{font-family:'Cinzel',serif;font-size:clamp(0.8rem,2vw,1.1rem);letter-spacing:0.6em;color:var(--gold);margin-top:1.5rem;position:relative;z-index:1}
+    .roses{font-size:clamp(1.5rem,4vw,2.5rem);margin-top:2rem;position:relative;z-index:1;animation:roseFloat 4s ease-in-out infinite}
+    @keyframes roseFloat{0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}}
+
+    /* ── SHARED ANIMATIONS ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0} to{opacity:1}}
+
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s ease,transform 0.9s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    .star{position:fixed;border-radius:50%;background:white;pointer-events:none;z-index:1;animation:twinkle linear infinite}
+    @keyframes twinkle{0%,100%{opacity:0.1;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.3)}}
+
+    .cin-bar{position:fixed;left:0;right:0;height:50px;background:#000;z-index:4999;pointer-events:none}
+    .cin-bar.top{top:0} .cin-bar.bottom{bottom:0}
+
+    .petal{position:fixed;font-size:1.2rem;pointer-events:none;z-index:11;animation:petalDrift linear infinite;opacity:0}
+    @keyframes petalDrift{0%{opacity:0;transform:translateY(0) rotate(0deg) translateX(0)} 10%{opacity:0.7} 90%{opacity:0.5} 100%{opacity:0;transform:translateY(110vh) rotate(720deg) translateX(60px)}}
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cin-bar top"></div>
+  <div class="cin-bar bottom"></div>
+  <div id="bubbles"></div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lightbox-close" onclick="closeLightbox()">✕ &nbsp; Close</button>
+    <img id="lightbox-img" src="" alt=""/>
+  </div>
+
+  <!-- CINEMATIC INTRO SLIDES -->
+  <div id="intro">
+    <div class="intro-slide">
+      <div class="intro-tag">A Love Story</div>
+      <div class="intro-title">Once upon</div>
+      <div class="intro-line"></div>
+      <div class="intro-sub">a beautiful day...</div>
+    </div>
+    <div class="intro-slide">
+      <div class="intro-tag">The Universe Smiled</div>
+      <div class="intro-title">She arrived</div>
+      <div class="intro-line"></div>
+      <div class="intro-sub">and the world became brighter</div>
+    </div>
+    <div class="intro-slide">
+      <div class="intro-tag">Today We Celebrate</div>
+      <div class="intro-title">Gladys</div>
+      <div class="intro-line"></div>
+      <div class="intro-sub">Happy Birthday, my love 🌹</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main">
+    <div id="stars"></div>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-eyebrow">Today is your day</div>
+      <h1 class="hero-name">Gladys</h1>
+      <div class="hero-birthday">Happy Birthday</div>
+      <div class="hero-divider"><span class="hero-divider-icon">🌹</span></div>
+      <p class="hero-poem">
+        In the garden of my heart,<br/>
+        your name blooms like the rarest rose —<br/>
+        radiant, tender, and forever mine.
+      </p>
+      <div class="scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ══ MUSIC PLAYER ══ -->
+    <section id="music-section">
+      <p class="section-label reveal">A song, just for you</p>
+      <h2 class="section-title reveal">Made With Love</h2>
+
+      <div class="music-player reveal">
+        <div class="music-vinyl" id="vinyl"></div>
+        <div class="music-song-title">A Song for Gladys</div>
+        <div class="music-artist">— Written & Sung Just For You —</div>
+        <p class="music-note">
+          Every note in this song is a word I couldn't find any other way to say.
+        </p>
+
+        <!--
+          ════════════════════════════════════════════
+          HOW TO ADD YOUR SONG:
+          1. Place your song file (e.g. "my-song.mp3") in the
+             SAME folder as this HTML file.
+          2. Change  src="your-song.mp3"  below to your filename.
+          3. That's it! ✓
+          ════════════════════════════════════════════
+        -->
+        <audio
+          id="audio-player"
+          class="music-audio"
+          controls
+          src="Gladys song.mpeg"
+        ></audio>
+
+        <div class="music-upload-hint"></div>
+      </div>
+    </section>
+
+    <!-- ══ PHOTO GALLERY ══ -->
+    <section id="gallery-section">
+      <p class="section-label reveal">Frozen in time</p>
+      <h2 class="section-title reveal">Moments</h2>
+
+      <div class="filmstrip reveal">
+        <div class="film-bar"></div>
+        <div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-bar"></div>
+      </div>
+
+      <!--
+        ════════════════════════════════════════════
+        HOW TO ADD YOUR PHOTOS:
+        1. Place your image files in the SAME folder as this HTML file.
+        2. For each photo frame below, replace  src="photo1.jpg"
+           with your actual filename (e.g. src="gladys-beach.jpg").
+        3. Change the caption text inside .photo-caption to describe the moment.
+        4. You can add or remove <div class="photo-frame"> blocks as needed.
+        ════════════════════════════════════════════
+      -->
+      <div class="photo-grid">
+
+        <!-- PHOTO 1 — replace src and caption -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo1.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num">Photo 01</span>
+            <span class="ph-hint">Replace src="photo 1.jpeg"</span>
+          </div>
+          <img src="photo 1.jpeg" alt="Our moment"/> -->
+          <div class="photo-caption">A beautiful soul with a beautiful smile</div>
+        </div>
+
+        <!-- PHOTO 2 -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo2.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num"></span>
+            <span class="ph-hint"></span>
+          </div>
+          <img src="photo 2.jpeg" alt="Our moment"/> -->
+          <div class="photo-caption">Grace in every glance</div>
+        </div>
+
+        <!-- PHOTO 3 -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo3.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num"></span>
+            <span class="ph-hint"></span>
+          </div>
+          <img src="photo 3.jpeg" alt="Our moment"/> -->
+          <div class="photo-caption">Soft heart, strong presence, unforgettable energy</div>
+        </div>
+
+        <!-- PHOTO 4 -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo4.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num">Photo 04</span>
+            <span class="ph-hint">Replace src="photo4.jpg"</span>
+          </div>
+          <img src="photo 4.jpeg" alt="Our moment"/> -->
+          <div class="photo-caption">Every picture of you feels like home</div>
+        </div>
+
+        <!-- PHOTO 5 -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo5.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num">Photo 05</span>
+            <span class="ph-hint">Replace src="photo5.jpg"</span>
+          </div>
+          <!-- <img src="photo5.jpg" alt="Our moment"/> -->
+          <div class="photo-caption">Write a caption here</div>
+        </div>
+
+        <!-- PHOTO 6 -->
+        <div class="photo-frame reveal" onclick="openLightbox('photo6.jpg')">
+          <div class="photo-placeholder">
+            <span class="ph-icon">📸</span>
+            <span class="ph-num">Photo 06</span>
+            <span class="ph-hint">Replace src="photo6.jpg"</span>
+          </div>
+          <!-- <img src="photo6.jpg" alt="Our moment"/> -->
+          <div class="photo-caption">Write a caption here</div>
+        </div>
+
+      </div><!-- end .photo-grid -->
+    </section>
+
+    <!-- ══ VIDEO SECTION ══ -->
+    <section id="video-section">
+      <p class="section-label reveal">Play & feel the love</p>
+      <h2 class="section-title reveal">A Message For You</h2>
+
+      <div class="video-wrapper reveal">
+        <div class="video-frame-border">
+
+          <!--
+            ════════════════════════════════════════════
+            HOW TO ADD YOUR VIDEO:
+            1. Place your video file (e.g. "my-video.mp4") in the
+               SAME folder as this HTML file.
+            2. Change  src="your-video.mp4"  below to your filename.
+            3. Remove the .video-placeholder div below once your video works.
+            ════════════════════════════════════════════
+          -->
+
+          <!-- Placeholder (delete this block once you add the video) -->
+          <div class="video-placeholder">
+            <span class="vp-icon">🎬</span>
+            <span class="vp-text">Your Video Here</span>
+            <span class="vp-hint">Replace src="your-video.mp4" below</span>
+          </div>
+
+          <!-- Uncomment this once you have your video file ready:
+          <video class="love-video" controls poster="">
+            <source src="your-video.mp4" type="video/mp4"/>
+            Your browser does not support video.
+          </video>
+          -->
+
+        </div>
+        <p class="video-caption">
+          "Some feelings are too big for words — so I made you this." 🎥
+        </p>
+      </div>
+    </section>
+
+    <!-- REASONS -->
+    <section id="reasons">
+      <p class="section-label reveal">Written with love</p>
+      <h2 class="section-title reveal">Why I Adore You</h2>
+      <div class="reasons-grid">
+        <div class="reason-card reveal"><div class="reason-number">01</div><div class="reason-text">Your smile is the kind that makes strangers forget they were in a hurry.</div></div>
+        <div class="reason-card reveal"><div class="reason-number">02</div><div class="reason-text">The way you laugh — it's the most honest and beautiful sound I know.</div></div>
+        <div class="reason-card reveal"><div class="reason-number">03</div><div class="reason-text">You carry kindness in everything you do, even the smallest things.</div></div>
+        <div class="reason-card reveal"><div class="reason-number">04</div><div class="reason-text">Your strength — quiet, graceful, and more powerful than you know.</div></div>
+        <div class="reason-card reveal"><div class="reason-number">05</div><div class="reason-text">Because every day with you feels like a story worth telling forever.</div></div>
+        <div class="reason-card reveal"><div class="reason-number">06</div><div class="reason-text">You make the ordinary feel extraordinary — just by being you.</div></div>
+      </div>
+    </section>
+
+    <!-- LETTER -->
+    <section id="letter">
+      <div class="letter-inner reveal">
+        <div class="letter-greeting">My Dearest Gladys,</div>
+        <div class="letter-body">
+          <p>Today, the world gets to celebrate the day you were born — and I am the luckiest person in it, because I get to call you mine.</p>
+          <p>You bring warmth to every room you enter. You bring peace to my loudest days. You bring colour to everything I see. And on this day, I want you to know — truly know — how deeply, completely, and hopelessly I love you.</p>
+          <p>May this year be as beautiful as you are. May every wish you've quietly carried in your heart find its way to you. May you be celebrated not just today, but every single morning you wake up.</p>
+          <p>Happy Birthday, my love. You deserve all the roses in the world, and then some.</p>
+        </div>
+        <span class="letter-sig">Forever yours 💛</span>
+      </div>
+    </section>
+
+    <!-- FINALE -->
+    <section id="finale">
+      <div class="finale-title reveal">Happy Birthday</div>
+      <div class="finale-year reveal">Gladys &nbsp;·&nbsp; 2025</div>
+      <div class="roses reveal">🌹 🌸 🌹 🌸 🌹</div>
+    </section>
+
+  </div><!-- end #main -->
+
+  <script>
+    // ── CURSOR ──
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+
+    // ── STARS ──
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const sz = Math.random() * 2.5 + 0.5;
+      s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}vw;top:${Math.random()*100}vh;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;
+      document.body.appendChild(s);
+    }
+
+    // ── LOVE BUBBLES ──
+    const bubblesEl = document.getElementById('bubbles');
+    const emojis = ['❤️','🌹','💕','💖','💗','💝','🌸','✨','💫','💞','🫶','💓'];
+    function createBubble() {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const size = 0.9 + Math.random() * 1.4;
+      b.style.cssText = `left:${Math.random()*100}vw;font-size:${size}rem;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*6}s`;
+      bubblesEl.appendChild(b);
+      setTimeout(() => b.remove(), 18000);
+    }
+    for (let i = 0; i < 18; i++) setTimeout(createBubble, i * 350);
+    setInterval(createBubble, 700);
+
+    // ── PETALS ──
+    function createPetal() {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = ['🌹','🌸','🌺'][Math.floor(Math.random()*3)];
+      p.style.cssText = `left:${Math.random()*100}vw;font-size:${0.7+Math.random()*0.8}rem;animation-duration:${12+Math.random()*14}s;animation-delay:${Math.random()*10}s`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 28000);
+    }
+    for (let i = 0; i < 8; i++) setTimeout(createPetal, i * 1200);
+    setInterval(createPetal, 2000);
+
+    // ── SCROLL REVEAL ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reason-card').forEach((c, i) => c.style.transitionDelay = `${i*0.12}s`);
+
+    // ── VINYL SPIN on audio play ──
+    const audio  = document.getElementById('audio-player');
+    const vinyl  = document.getElementById('vinyl');
+    if (audio) {
+      audio.addEventListener('play',  () => vinyl.classList.add('spinning'));
+      audio.addEventListener('pause', () => vinyl.classList.remove('spinning'));
+      audio.addEventListener('ended', () => vinyl.classList.remove('spinning'));
+    }
+
+    // ── LIGHTBOX ──
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lb.classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightbox-img').src = '';
+    }
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // ── ENABLE IMG tags once photos are added ──
+    // (Instructions are in HTML comments above each photo frame)
+  </script>
+</body>
+</html>
